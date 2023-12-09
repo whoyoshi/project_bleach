@@ -1,6 +1,5 @@
 body {
-  margin: 0px auto;
-  padding: 5px 30px;
+  padding:  0px 30px;
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   color: rgb(0, 0, 0);
@@ -12,4 +11,5 @@ a {
 
 img {
   width: 25%;
+  margin: 25px 25px 25px 0px;
 }
