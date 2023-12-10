@@ -1,21 +1,19 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/test1')
 
-var schema = mongoose.Schema({ name: String})
-schema.methods.gotei = function(){
-  console.log(this.get("name") + " состоят в организации Готей 13");
-}
+var Bleach = require("./models/bleach").Bleach
+var bleach = new Bleach({
+  title: "Капитан",
+  nick: "captain"
+})
+console.log(bleach);
 
-const Bleach = mongoose.model('Bleach', schema);
+bleach.save().then(function(bleach) {
+    console.log(savedBleach.title);
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
 
-const shinigami = new Bleach({ name: 'Шинигами' });
-shinigami.save().then(() => shinigami.gotei());
-
-//данный код выполняет следующие операции:
-// - Подключается к базе данных MongoDB.
-// - Определяет модель Bleach с одним полем.
-// - Создает новый экземпляр модели с именем "Шинигами".
-// - Сохраняет созданный экземпляр в базу данных и выводит сообщение после сохранения.
-
-
-// shinigami.save().then(() => shinigami.gotei()) сохраняет созданный экземпляр в базе данных и после успешного сохранения вызывает метод gotei для данного экземпляра. Таким образом, после сохранения будет выведено сообщение "Шинигами состоят в организации Готей 13".
+// console.log(bleach.title) - это может вызвать ошибку, так как сохранение объекта в базе данных может быть асинхронной операцией, и свойства объекта могут быть недоступны до того, как операция завершится. Для исправления кода следует использовать метод "catch()" для обработки ошибок при сохранении объекта в базе данных. Также, обращение к свойству "title" следует делать после успешного сохранения объекта в базе данных. 
+// внутри функции обратного вызова для метода "then()" используется аргумент "savedBleach" вместо "bleach", чтобы избежать путаницы с исходным объектом. Используется метод "catch()" для обработки ошибок при сохранении объекта в базе данных.
