@@ -8,7 +8,7 @@ var bleach = new Bleach({
 })
 console.log(bleach);
 
-bleach.save().then(function(bleach) {
+bleach.save().then(function(savedBleach) {
     console.log(savedBleach.title);
   })
   .catch(function(error) {
