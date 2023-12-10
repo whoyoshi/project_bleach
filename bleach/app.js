@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// подключаем бд
+var mongoose = require('mongoose')                
+mongoose.connect('mongodb://localhost/bleachDB')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
