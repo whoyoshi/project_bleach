@@ -3,7 +3,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 var schema = mongoose.Schema({ name: String})
 schema.methods.gotei = function(){
-  console.log(this.get("name") + " состоят в организации Готей 13");
+  console.log(this.get("name") + " - это боги смерти");
 }
 
 const Bleach = mongoose.model('Bleach', schema);
