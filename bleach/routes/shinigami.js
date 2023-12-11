@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var Bleach = require("C:/aip/project_bleach/bleach/models/bleach.js").Bleach;
+const express = require('express');
+const router = express.Router();
+const Bleach = require("C:/aip/project_bleach/bleach/models/bleach.js").Bleach;
 
 
 /* GET users listing. */
