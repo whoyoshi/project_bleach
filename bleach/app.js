@@ -6,6 +6,7 @@ var logger = require('morgan');
 // подключаем бд
 var mongoose = require('mongoose')                
 mongoose.connect('mongodb://localhost/bleachDB')
+var session = require("express-session");  //модуль для хранилища данных между HTTP запросами
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,6 +25,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: "Bleach",          //для подписи и шифрования данных сессии
+  cookie:{maxAge:60*1000},   //максимальное время жизни куки сессии
+  resave: true,              //сессия будет пересохраняться даже при каждом запросе
+  saveUninitialized: true    //сессии будут сохраняться даже тогда, когда они не были явно изменены
+}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/shinigami', shinigami);
