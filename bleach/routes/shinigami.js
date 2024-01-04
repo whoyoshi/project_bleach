@@ -1,29 +1,37 @@
-var express = require('express');
-var router = express.Router();
-var Bleach = require("C:/aip/project_bleach/bleach/models/bleach.js").Bleach;
-
+const express = require('express');
+const router = express.Router();
+const Bleach = require("C:/aip/project_bleach/bleach/models/bleach.js").Bleach;
+const async = require("async");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('Новый маршрутизатор, для маршрутов, начинающихся с shinigami');
+  res.send('Новый маршрутизатор, для маршрутов, начинающихся с shinigami')
 });
 
-// /* Страница шинигами */
-router.get("/:nick", async (req, res, next) => {
+
+router.get('/:nick', async (req, res, next) => {
   try {
-    const bleach = await Bleach.findOne({ nick: req.params.nick });
-    console.log(bleach);
-    if (!bleach) {              //код проверяет наличие объекта с заданным "nick" в базе данных и обрабатывает результаты запроса.
-      throw new Error("Нет такого Шинигами!");
+    const [bleach, shinigami] = await Promise.all([
+      Bleach.findOne({nick: req.params.nick}),
+      Bleach.find({}, {_id: 0, title: 1, nick: 1})
+    ]);
+    if (!bleach) {
+      throw new Error("Нет такого Шинигами");
     }
-    res.render('bleach', {
-      title: bleach.title,
-      picture: bleach.avatar,
-      desc: bleach.desc
-    });
+    renderBleach(res, bleach.title, bleach.avatar, bleach.desc, shinigami);
   } catch (err) {
     next(err);
   }
 });
+
+function renderBleach(res, title, picture, desc, shinigami) {
+  console.log(shinigami);
+  res.render('bleach', {
+    title: title,
+    picture: picture,
+    desc: desc,
+    menu: shinigami,
+  });
+}
 
 module.exports = router;

@@ -14,15 +14,13 @@
         <li class="nav-item">
           <a class="nav-link active" href="/shinigami/main">Главная</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/shinigami/kurosaki">Ичиго</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/shinigami/rukia">Рукия</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/shinigami/unohana">Унохана</a>
-        </li>
+        <% menu.forEach(function(shinigami) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/shinigami/<%= shinigami.nick %>">
+              <%= shinigami.title %>
+            </a>
+          </li>
+          <% }); %>
       </ul>
       <ul class="navbar-nav navbar-right">
         <li>
