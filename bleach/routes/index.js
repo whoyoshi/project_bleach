@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Bleach = require("C:/aip/project_bleach/bleach/models/bleach.js").Bleach;
+const Bleach = require("../models/bleach").Bleach;
 
+router.get('/', function(req, res, next) {
+  res.cookie('greeting', 'Hi!!!').render('index', { 
+    title:'Express',
+    menu:menu });
+  });
 
 /* Страница главная */
 router.get('/shinigami/main', async (req, res, next) => {
@@ -14,12 +19,18 @@ router.get('/shinigami/main', async (req, res, next) => {
 
     // Запрос данных из базы данных 
     mainPageData.menu = await Bleach.find({}, { _id: 0, title: 1, nick: 1 });
-    //  отвечает за рендеринг (отображение) страницы с использованием шаблона bleach.ejs.
+    //  отвечает за рендеринг страницы с использованием шаблона bleach.ejs.
     res.render('bleach', mainPageData);
   } catch (err) {
     next(err);
   }
 });
 
+// router.get('/', function(req, res, next) {
+//   res.cookie('greeting', 'Hi!!!').render('index', { 
+//     title:'Express',
+//     menu:menu });
+//   });
+  
 module.exports = router;
 
