@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var MongoStore = require('connect-mongo');
 app.use(session({
   secret: "Bleach",       //для подписи и шифрования данных сессии
   cookie: {               //максимальное время жизни куки сессии
@@ -32,7 +33,8 @@ app.use(session({
     httpOnly: false,      
   },
   resave: true,             //сессия будет пересохраняться даже при каждом запросе
-  saveUninitialized: true   //сессии будут сохраняться даже тогда, когда они не были явно изменены
+  saveUninitialized: true,   //сессии будут сохраняться даже тогда, когда они не были явно изменены
+  store: MongoStore.create({mongoUrl: 'mongodb://localhost/bleachDB'})
 }));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
