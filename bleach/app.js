@@ -36,6 +36,12 @@ app.use(session({
   saveUninitialized: true,   //сессии будут сохраняться даже тогда, когда они не были явно изменены
   store: MongoStore.create({mongoUrl: 'mongodb://localhost/bleachDB'})
 }));
+app.use(function(req,res,next){
+  req.session.counter = req.session.counter +1 || 1
+  next()
+})
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/shinigami', shinigami);
