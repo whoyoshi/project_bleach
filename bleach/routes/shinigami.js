@@ -1,13 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Bleach = require("C:/aip/project_bleach/bleach/models/bleach.js").Bleach;
+const Bleach = require("../models/bleach").Bleach;
 const async = require("async");
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('Новый маршрутизатор, для маршрутов, начинающихся с shinigami')
-});
-
 
 router.get('/:nick', async (req, res, next) => {
   try {
@@ -30,7 +24,7 @@ function renderBleach(res, title, picture, desc, shinigami) {
     title: title,
     picture: picture,
     desc: desc,
-    menu: shinigami,
+    // menu: shinigami,
   });
 }
 
