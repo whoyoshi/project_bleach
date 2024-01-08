@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Bleach = require("../models/bleach").Bleach;
 
+/* GET login/registration page. */
+router.get('/logreg', function(req, res, next) {
+  res.render('logreg',{title: 'Loq in'});
+});
 
 /* Страница главная */
 router.get('/', async (req, res, next) => {
