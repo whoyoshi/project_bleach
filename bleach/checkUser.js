@@ -3,7 +3,7 @@ mongoose.connect("mongodb://localhost/bleachDB");
 const User = require("./models/user.js").User;
 
 const first_user = new User({
-  username: "Nikahrom",
+  username: "NikaHrom",
   password: "qwerty123"
 });
 
