@@ -3,11 +3,6 @@ const router = express.Router();
 const Bleach = require("../models/bleach").Bleach;
 const User = require("../models/user").User;
 
-/* GET login/registration page. */
-router.get('/logreg', function(req, res, next) {
-  res.render('logreg',{title: 'Log In'});
-});
-
 /* GET home page. */
 router.get('/', async (req, res, next) => {
   try {
@@ -18,6 +13,11 @@ router.get('/', async (req, res, next) => {
   catch (err) {
     next(err);
   }
+});
+
+/* GET login/registration page. */
+router.get('/logreg', function(req, res, next) {
+  res.render('logreg', { title: 'Вход',error:null}); 
 });
 
 /* POST login/registration page. */
@@ -45,6 +45,7 @@ router.post('/logreg', async function(req, res, next) {
   }
 });
 
+/* GET auth page. */
 router.get('/logreg', function(req, res, next) {
   res.render('logreg',{error:null});
   });
