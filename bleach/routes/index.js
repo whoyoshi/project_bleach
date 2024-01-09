@@ -11,7 +11,7 @@ router.get('/logreg', function(req, res, next) {
 router.get('/', async (req, res, next) => {
   try {
     const menu = await Bleach.find({}, { _id: 0, title: 1, nick: 1 });
-    req.session.greeting = "Hi!!!"
+    req.session.greeting = "Hi!!!";
     res.render('index', { title: 'Bleach', menu: menu, counter:req.session.counter });
   } 
   catch (err) {
@@ -21,8 +21,8 @@ router.get('/', async (req, res, next) => {
 
 /* POST login/registration page. */
 router.post('/logreg', function(req, res, next) { 
-  var username = req.body.username 
-  var password = req.body.password
+  var username = req.body.username;
+  var password = req.body.password;
 });
    
 module.exports = router;
